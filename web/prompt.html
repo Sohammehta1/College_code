@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript"> 
+        function add_by_prompt(){
+            let var1 = prompt("Enter first number","1");
+            let var2 = prompt("Enter second number","2");
+
+            sum = var1 + "+" + var2;
+            sum = eval(sum);
+            alert("This sum is : "+ sum);
+            console.log("The sum is : "+sum);
+        }
+            function fact(num){
+                if(num<=1)
+                    return 1;
+                else
+                     return num*fact(num-1);
+            }
+
+            function calc_fact(){
+                // let var1 = prompt("Enter value : ","0");
+                let var1 =document.mainform.textbox.value;
+                console.log(var1);
+                res = fact(var1);
+                alert(res)
+            }
+        </script>
+
+      
+   
+</head>
+<body>
+   
+    <!-- <input type = "button" onclick = "add_by_prompt()" value = "add">   -->
+    <form  name="mainform">
+        <input type="text"  name="textbox"  required>
+        <input type="button" onclick="calc_fact()" value="Calculate factorial"/>
+    </form>   
+    
+</body>
+</html>
