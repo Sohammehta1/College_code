@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+
+    header {
+      background-color: #333;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .profile {
+      display: flex;
+      align-items: center;
+    }
+
+    .profile img {
+      border-radius: 50%;
+      margin-right: 20px;
+    }
+
+    .contact-info {
+      text-align: right;
+    }
+
+    .contact-info p {
+      margin: 5px 0;
+    }
+
+    .container {
+      max-width: 100%;
+      margin: 20px;
+      background-color: white;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .dropdown {
+      margin-top: 30px; /* Increased vertical padding */
+    }
+
+    h3 {
+      font-size: 24px; /* Increased font size */
+    }
+
+    .dropdown-content {
+      display: none;
+      padding: 15px; /* Increased padding */
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="profile">
+      <img src="your-photo.jpg" alt="Your Photo" width="100">
+      <div>
+        <h1 style="font-size: 32px;">Your Name</h1> <!-- Increased font size -->
+        <h2 style="font-size: 24px;">College Name</h2> <!-- Increased font size -->
+      </div>
+    </div>
+    <div class="contact-info">
+      <p>
+        <a href="https://linkedin.com/in/your-linkedin-id" target="_blank" rel="noopener noreferrer">
+          <img src="linkedin-logo.png" alt="LinkedIn">
+          LinkedIn
+        </a>
+      </p>
+      <p>
+        <a href="https://github.com/your-github-id" target="_blank" rel="noopener noreferrer">
+          <img src="github-logo.png" alt="GitHub">
+          GitHub
+        </a>
+      </p>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <div class="dropdown">
+      <h3>Skills</h3>
+      <div class="dropdown-content">
+        <!-- Your skills go here -->
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <h3>Projects and Certificates</h3>
+      <div class="dropdown-content">
+        <!-- Your projects and certificates go here -->
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <h3>About Me</h3>
+      <div class="dropdown-content">
+        <!-- Information about you goes here -->
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <h3>Education</h3>
+      <div class="dropdown-content">
+        <!-- Your education details go here -->
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
