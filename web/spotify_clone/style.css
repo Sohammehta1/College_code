@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Lemon&display=swap');
+
+
+body{
+    background-color: rgb(226, 223, 218);
+}
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+nav{
+    font-family: 'Lemon' ;
+}
+
+nav ul{
+    display: flex;
+}
