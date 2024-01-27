@@ -1,1 +1,2 @@
 font-family: 'Honk', system-ui;
+font-family: 'Montserrat', sans-serif;
