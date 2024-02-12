@@ -7,54 +7,44 @@ class Node:
     self.g_cost = g_cost  # Cost from start to this node
     self.h_cost = h_cost  # Heuristic estimate of cost to goal
     self.f_cost = g_cost + h_cost  # Total cost estimate
+  def __lt__(self, other):
+      return self.f_cost < other.f_cost
 
 def a_star(start, goal, neighbors, distance, heuristic):
-  """
-  A* algorithm implementation.
+    open_set = []
+    closed_set = set()
+    start_node = Node(start, None, 0, heuristic(start, goal))
+    heappush(open_set, start_node)
 
-  Args:
-    start: Starting position.
-    goal: Goal position.
-    neighbors: Function that takes a position and returns its neighbors.
-    distance: Function that takes two positions and returns the cost of moving between them.
-    heuristic: Function that takes a position and returns the estimated cost to goal.
+    while open_set:
+        current_node = heappop(open_set)
+        if current_node.position == goal:
+            path = []
+            while current_node:
+                path.append(current_node.position)
+                current_node = current_node.parent
+            path.reverse()
+            return path
 
-  Returns:
-    A list of positions representing the path from start to goal, or None if no path exists.
-  """
-  open_set = []
-  closed_set = set()
-  start_node = Node(start, None, 0, heuristic(start, goal))
-  heappush(open_set, start_node)
+        closed_set.add(current_node.position)
 
-  while open_set:
-    current_node = heappop(open_set)
-    if current_node.position == goal:
-      path = []
-      while current_node:
-        path.append(current_node.position)
-        current_node = current_node.parent
-      path.reverse()
-      return path
+        for neighbor in neighbors(current_node.position):
+            if neighbor in closed_set:
+                continue
+            tentative_g_cost = current_node.g_cost + distance(current_node.position, neighbor)
+            new_node = Node(neighbor, current_node, tentative_g_cost, heuristic(neighbor, goal))
 
-    closed_set.add(current_node.position)
+            found = False
+            for node in open_set:
+                if node.position == new_node.position and node.g_cost < tentative_g_cost:
+                    found = True
+                    break
+            if not found:
+                new_node.parent = current_node
+                heappush(open_set, new_node)
 
-    for neighbor in neighbors(current_node.position):
-      if neighbor in closed_set:
-        continue
-      tentative_g_cost = current_node.g_cost + distance(current_node.position, neighbor)
-      new_node = Node(neighbor, current_node, tentative_g_cost, heuristic(neighbor, goal))
+    return None
 
-      found = False
-      for node in open_set:
-        if node.position == new_node.position and node.g_cost <= tentative_g_cost:
-          found = True
-          break
-      if not found:
-        new_node.parent = current_node
-        heappush(open_set, new_node)
-
-  return None
 
 # Example usage (grid-based map):
 def neighbors(position):
