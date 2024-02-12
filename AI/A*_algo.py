@@ -1,71 +1,100 @@
-from heapq import heappush, heappop
+import heapq
 
 class Node:
-  def __init__(self, position, parent, g_cost, h_cost):
-    self.position = position
-    self.parent = parent
-    self.g_cost = g_cost  # Cost from start to this node
-    self.h_cost = h_cost  # Heuristic estimate of cost to goal
-    self.f_cost = g_cost + h_cost  # Total cost estimate
-  def __lt__(self, other):
-      return self.f_cost < other.f_cost
+    def __init__(self, name):
+        self.name = name
+        self.neighbors = {}  # Key is neighbor name, value is distance
+        self.parent = None
+        self.g = 0  # Cost from start to current node
+        self.h = 0  # Estimated cost from current node to goal (always 0 in this case)
+        self.f = 0  # Total cost (g + h)
+    def __lt__(self, other):
+        return self.f < other.f
 
-def a_star(start, goal, neighbors, distance, heuristic):
-    open_set = []
-    closed_set = set()
-    start_node = Node(start, None, 0, heuristic(start, goal))
-    heappush(open_set, start_node)
+def find_path(graph, start_node, goal_node):
+    open_list = []  # Nodes to explore, ordered by f-score
+    closed_list = set()  # Visited nodes
 
-    while open_set:
-        current_node = heappop(open_set)
-        if current_node.position == goal:
+    start_node.g = 0  # Starting node has no cost from itself
+    heapq.heappush(open_list, (start_node.f, start_node))  # Add starting node to open list
+
+    while open_list:
+        _, current_node = heapq.heappop(open_list)  # Get node with lowest f-score
+
+        if current_node == goal_node:
+            # Found the goal! Backtrack to construct the path
             path = []
             while current_node:
-                path.append(current_node.position)
+                path.append(current_node.name)
                 current_node = current_node.parent
             path.reverse()
             return path
 
-        closed_set.add(current_node.position)
+        closed_list.add(current_node)
 
-        for neighbor in neighbors(current_node.position):
-            if neighbor in closed_set:
+        for neighbor_name, _ in current_node.neighbors.items():
+            # Skip neighbors already in closed list
+            if neighbor_name in closed_list:
                 continue
-            tentative_g_cost = current_node.g_cost + distance(current_node.position, neighbor)
-            new_node = Node(neighbor, current_node, tentative_g_cost, heuristic(neighbor, goal))
 
-            found = False
-            for node in open_set:
-                if node.position == new_node.position and node.g_cost < tentative_g_cost:
-                    found = True
-                    break
-            if not found:
-                new_node.parent = current_node
-                heappush(open_set, new_node)
+            neighbor = graph[neighbor_name]
 
-    return None
+            # Calculate tentative g-score for neighbor
+            tentative_g = current_node.g + current_node.neighbors[neighbor_name]
 
+            # Check if neighbor already in open list and if new path is better
+            if neighbor in (node for _, node in open_list):
+                if tentative_g >= neighbor.g:
+                    continue
+            else:
+                # Add neighbor to open list
+                neighbor.g = tentative_g
+                neighbor.parent = current_node
+                # No heuristic in this case (estimated cost always 0)
+                neighbor.f = neighbor.g  # Total cost is just g-score
+                heapq.heappush(open_list, (neighbor.f, neighbor))
 
-# Example usage (grid-based map):
-def neighbors(position):
-  x, y = position
-  return [(x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)]
+    return None  # No path found
 
-def distance(position1, position2):
-  x1, y1 = position1
-  x2, y2 = position2
-  return abs(x1 - x2) + abs(y1 - y2)
+def main():
+    # Get number of nodes and create graph
+    num_nodes = int(input("Enter the number of nodes: "))
+    graph = {}
+    for i in range(num_nodes):
+        node_name = input("Enter node name: ")
+        graph[node_name] = Node(node_name)
 
-def heuristic(position, goal):
-  x1, y1 = position
-  x2, y2 = goal
-  return abs(x1 - x2) + abs(y1 - y2)  # Manhattan distance
+    # Get connections and distances
+    for node_name, node in graph.items():
+        num_connections = int(input(f"Enter the number of connections for {node_name}: "))
+        for _ in range(num_connections):
+            neighbor_name = input(f"Enter a neighbor for {node_name}: ")
+            try:
+                distance = float(input(f"Enter the distance to {neighbor_name}: "))
+            except ValueError:
+                print("Invalid distance. Please enter a number.")
+                continue  # Restart input for that connection
+            node.neighbors[neighbor_name] = distance
 
-start = (0, 0)
-goal = (4, 4)
-path = a_star(start, goal, neighbors, distance, heuristic)
+        # No need for estimated distances as user provides all connections and costs
 
-if path:
-  print("Path found:", path)
-else:
-  print("No path found")
+    # Get start and goal nodes
+    start_node_name = input("Enter the starting node: ")
+    goal_node_name = input("Enter the goal node: ")
+
+    # Set heuristic to 0 since we don't have an estimate
+    for node in graph.values():
+        node.h = 0
+
+    # Run A* and print path
+    path = find_path(graph, graph[start_node_name], graph[goal_node_name])
+    if path:
+        print("Path found:", path)
+        for node_name in path:
+            node = graph[node_name]
+            print(f"{node_name}: f={node.f}, g={node.g}, h={node.h}")
+    else:
+        print("No path found!")
+
+if __name__ == "__main__":
+    main()
