@@ -1,0 +1,41 @@
+<!DOCTYPE html lang="en">
+<html>
+<head>
+	<title>Zara | Contact</title>
+	<meta charset=＂utf-8＂>
+</head>
+<body>
+	<div class="nav">
+	  <img class="logo" src="../images/logo.png" height="60px" alt="Zara">
+	  <div class="link"><a href="../index.html">Home</a><div class="link">
+	  <div class="link"><a href="portfolio.html">Portfolio</a><div class="link">
+	  <div class="link"><a href="services.html">Services</a><div class="link">
+	  <div class="link"><a href="contact.html" target="_blank">Contact</a><div class="link">
+	</div>
+
+	<h1>Contact</h1>
+
+	<img class="cover" src="../images/contact.jpg" height="300" alt="bread">
+
+	<p>Get in touch today.</p>
+
+	<form action="mailto:zara@zaraphotography.photo?subject=Website%20Query" method="post" enctype="text/plain">
+		<label for="name">Full name </label>
+		<input id="name" type="text" name="name" required><br>
+		<label for="email" required>Email address </label>
+		<input id="email" type="email" name="email" required><br>
+		<label for="query">Query type</label>
+		<select id="query" name="querytype" required>
+			<option value="media">Media quotation</option>
+			<option value="restaurant">Food industry quotation</option>
+			<option value="collab">Collaboration</option>
+			<option value="question">Other questions</option>
+		</select><br>
+		<label for="message">Message</label>
+		<textarea id="message" name="message" required></textarea><br>
+		<input type="submit" value="Submit" name="submit">
+		<p>Thank you!</p>
+
+	</form>
+</body>
+</html>
