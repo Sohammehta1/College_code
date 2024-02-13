@@ -11,6 +11,11 @@
             border-radius: 12px;
             text-align: center;
             box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+            background: #C33764;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #1D2671, #C33764);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #1D2671, #C33764); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            
+            cursor: move
         }
 
         input[type="text"] {
@@ -67,7 +72,8 @@
             '1', '2', '3', '+',
             '4', '5', '6', '-',
             '7', '8', '9', '*',
-            '0', '=', '/', 'Clr'
+            '0', '=', '(', ')',
+            '^','log','Clr'
         ];
 
         // Get the calculator container
@@ -89,7 +95,9 @@
                 clearDisplay();
             } else if (value === '=') {
                 calculate();
-            } else {
+            }else if (value === 'log') { // Handling logarithm operation
+                evaluateLogarithm();}
+            else {
                 appendToDisplay(value);
             }
         }
@@ -112,9 +120,58 @@
             document.getElementById('display').value = result;
         }
 
+        function evaluateLogarithm(){
+            var number = prompt('Enter number : ');
+            var base = prompt('Enter base');
+            if(base != null && number != null){
+                var ans = eval('Math.log('+number+')/Math.log('+base+')');
+                document.getElementById('display').value = ans;
+            }
+            else{
+                alert("Invalid value")
+            }
+        }
+
         function clearDisplay() {
             document.getElementById('display').value = '';
         }
+
+        
+        const titleBar = document.getElementById('titleBar');
+
+// Variables to store mouse position during drag
+let offsetX, offsetY;
+
+// Event listener for mouse down on title bar
+titleBar.addEventListener('mousedown', function(event) {
+    // Calculate the initial mouse position relative to the window
+    offsetX = event.clientX - calculator.offsetLeft;
+    offsetY = event.clientY - calculator.offsetTop;
+
+    // Change cursor to grabbing during drag
+    calculator.style.cursor = 'grabbing';
+
+    // Event listener for mouse move
+    window.addEventListener('mousemove', handleMouseMove);
+
+    // Event listener for mouse up
+    window.addEventListener('mouseup', function() {
+        // Remove event listeners when mouse is released
+        window.removeEventListener('mousemove', handleMouseMove);
+        calculator.style.cursor = 'move';
+    });
+});
+
+// Function to handle mouse move
+function handleMouseMove(event) {
+    // Calculate the new position of the calculator based on mouse position
+    const newX = event.clientX - offsetX;
+    const newY = event.clientY - offsetY;
+
+    // Set the new position of the calculator
+    calculator.style.left = newX + 'px';
+    calculator.style.top = newY + 'px';
+}
     </script>
 </body>
 </html>
