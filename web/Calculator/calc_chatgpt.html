@@ -8,8 +8,9 @@
             margin: 50px auto;
             border: 1px solid #ccc;
             padding: 10px;
-            border-radius: 5px;
+            border-radius: 12px;
             text-align: center;
+            box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
         }
 
         input[type="text"] {
@@ -17,6 +18,8 @@
             margin-bottom: 10px;
             padding: 5px;
             box-sizing: border-box;
+            background-color: rgb(68, 64, 64);
+            color: rgb(14, 227, 14);
         }
 
         button {
@@ -56,28 +59,41 @@
 <body>
     <div id="calculator">
         <input type="text" id="display" disabled>
-        <button onclick="appendToDisplay('1')">1</button>
-        <button onclick="appendToDisplay('2')">2</button>
-        <button onclick="appendToDisplay('3')">3</button>
-        <button onclick="appendToDisplay('+')">+</button>
-        <br>
-        <button onclick="appendToDisplay('4')">4</button>
-        <button onclick="appendToDisplay('5')">5</button>
-        <button onclick="appendToDisplay('6')">6</button>
-        <button onclick="appendToDisplay('-')">-</button>
-        <br>
-        <button onclick="appendToDisplay('7')">7</button>
-        <button onclick="appendToDisplay('8')">8</button>
-        <button onclick="appendToDisplay('9')">9</button>
-        <button onclick="appendToDisplay('*')">*</button>
-        <br>
-        <button onclick="appendToDisplay('0')">0</button>
-        <button onclick="calculate()" id="equal">=</button>
-        <button onclick="appendToDisplay('/')">/</button>
-        <button onclick="clearDisplay()" id="clear">Clear</button>
     </div>
 
     <script>
+        // Define buttons and their labels
+        const buttons = [
+            '1', '2', '3', '+',
+            '4', '5', '6', '-',
+            '7', '8', '9', '*',
+            '0', '=', '/', 'Clr'
+        ];
+
+        // Get the calculator container
+        const calculator = document.getElementById('calculator');
+
+        // Dynamically generate buttons
+        buttons.forEach(label => {
+            const button = document.createElement('button');
+            button.textContent = label;
+            button.onclick = () => handleButtonClick(label);
+            if (label === '=') button.id = 'equal';
+            if (label === 'Clr') button.id = 'clear';
+            calculator.appendChild(button);
+        });
+
+        // Function to handle button clicks
+        function handleButtonClick(value) {
+            if (value === 'Clr') {
+                clearDisplay();
+            } else if (value === '=') {
+                calculate();
+            } else {
+                appendToDisplay(value);
+            }
+        }
+
         function appendToDisplay(value) {
             document.getElementById('display').value += value;
         }
