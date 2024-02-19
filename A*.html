@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A* Algorithm Visualization</title>
+    <style>
+        /* CSS styling for visualization */
+        #graph-container {
+            width: 600px;
+            height: 400px;
+            border: 1px solid black;
+            position: relative;
+        }
+        .node {
+            width: 20px;
+            height: 20px;
+            border: 1px solid black;
+            border-radius: 50%;
+            background-color: white;
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>A* Algorithm Visualization</h1>
+    <div id="graph-container"></div>
+
+    <script>
+        // JavaScript code for visualization
+        // Define your graph and A* algorithm implementation here
+        // For simplicity, I'll just define a basic graph with hardcoded nodes
+
+        // Define your Node class and A* algorithm implementation here
+        class Node {
+            constructor(name, x, y) {
+                this.name = name;
+                this.x = x;
+                this.y = y;
+            }
+        }
+
+        // Hardcoded graph with nodes and connections
+        const nodes = [
+            new Node("A", 50, 50),
+            new Node("B", 200, 50),
+            new Node("C", 350, 50),
+            new Node("D", 100, 200),
+            new Node("E", 300, 200),
+            new Node("F", 200, 350),
+        ];
+
+        const graphContainer = document.getElementById('graph-container');
+
+        // Render nodes on the graph
+        nodes.forEach(node => {
+            const nodeElement = document.createElement('div');
+            nodeElement.classList.add('node');
+            nodeElement.textContent = node.name;
+            nodeElement.style.left = node.x + 'px';
+            nodeElement.style.top = node.y + 'px';
+            graphContainer.appendChild(nodeElement);
+        });
+
+        // You can add event listeners or interact with these nodes as needed
+    </script>
+</body>
+</html>
