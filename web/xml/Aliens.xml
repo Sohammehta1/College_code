@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="alien_css.css" type="text/css"?>
+<!DOCTYPE aliens SYSTEM "alienType.dtd">
+   
+<aliens>
+    <alien aid = "a1" lang="martian">
+        <name>soham</name>
+        <rank>900</rank>
+    </alien>
+    
+    <alien aid ="a2" lang = "lunar">
+        <name>sam</name>
+        <rank>3939</rank>
+    </alien>
+</aliens>

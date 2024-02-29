@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="Employee.dtd" type="application/xml-dtd"?>
+<?xml-stylesheet href="design.xsl" type="text/xsl"?>
+
+<Business>
+    <company cname ="Boat">
+        <Employee eid ="e1">
+            <name>Aman Gupta</name>
+            <role>CEO</role>
+            <salary>10000000</salary>
+        </Employee>
+        <Employee eid ="e2">
+            <name>Soham Mehta</name>
+            <role>CTO</role>
+            <salary>10000000</salary>
+        </Employee>
+    </company>
+</Business>

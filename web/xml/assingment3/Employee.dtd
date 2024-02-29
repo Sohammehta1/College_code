@@ -1,0 +1,8 @@
+<!ELEMENT Business (company)>
+<!ELEMENT company (Employee+)>
+<!ATTLIST company cname ID #REQUIRED>
+<!ELEMENT Employee (name,role, salary)>
+<!ATTLIST Employee eid ID #REQUIRED>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT role (#PCDATA)>
+<!ELEMENT salary (#PCDATA)>

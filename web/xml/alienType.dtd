@@ -1,0 +1,7 @@
+
+<!ELEMENT aliens (alien+)>
+<!ELEMENT alien (name,rank)>
+<!ATTLIST alien aid ID #REQUIRED>
+<!ATTLIST alien lang (martian|lunar|english) "english">
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT rank (#PCDATA)>
