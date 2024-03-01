@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-model href="Employee.dtd" type="application/xml-dtd"?>
+<!DOCTYPE Business SYSTEM "Employee.dtd">
 <?xml-stylesheet href="design.xsl" type="text/xsl"?>
 
 <Business>
