@@ -1,3 +1,6 @@
 {
-    "livePreview.defaultPreviewPath": "/web/text.html"
+    "livePreview.defaultPreviewPath": "/web/text.html",
+    "files.associations": {
+        "unordered_map": "cpp"
+    }
 }
