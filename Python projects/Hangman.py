@@ -1,7 +1,6 @@
 
 import random as rm
 import time
-import math
 import tkinter as tk
 from tkinter import simpledialog
 
@@ -34,10 +33,11 @@ def start():
             pos = answer.index(guess)
             answer[pos] = '*'
             letters[pos] = guess
-            if n-1 == 0:
+            n-= 1
+            if n ==0:
+                txt = "Congratulations!, you have won!"
+                label.config(text = txt)
                 break
-            else:
-                n-=1
         else:
             count -= 1
             if count != 0:
@@ -115,7 +115,7 @@ app = tk.Tk()
 # frame.pack(expand=True)
 canvas = tk.Canvas(app,width=200,height=220)
 canvas.pack()
-label  = tk.Label(app,text='')
+label  = tk.Label(app,text='Hangman')
 label.pack()
 btn = tk.Button(app, text="Hello", command=get_name)
 btn.pack() 
