@@ -2,5 +2,6 @@
     "livePreview.defaultPreviewPath": "/web/text.html",
     "files.associations": {
         "unordered_map": "cpp"
-    }
+    },
+    "python.REPL.enableREPLSmartSend": false
 }
