@@ -31,19 +31,36 @@ class PrimMST:
         self.print_mst(parent)
 
     def print_mst(self, parent):
-        print("Edge \tWeight")
+        print("Bridge cost with minimum construction cost")
+        print("Road \t\t cost")
         for i in range(1, self.V):
-            print(parent[i], "-", i, "\t", self.graph[i][parent[i]])
+            print(f"{regions[parent[i]]}-{regions[i]} : {self.graph[i][parent[i]]}")
 
 
 # Example usage
-g = PrimMST(5)
-g.graph = [
-    [0, 2, 0, 6, 0],
-    [2, 0, 3, 8, 5],
-    [0, 3, 0, 0, 7],
-    [6, 8, 0, 0, 9],
-    [0, 5, 7, 9, 0]
-]
+
+n = int(input("Enter the number of regions you want to connect using bridges"))
+print("Enter the name of the regions one by one in order : ")
+regions = []
+for i in range(n):
+    regions.append(input("> "))
+print("\n Enter the cost of the bridge construction for each bridge -> ")
+print("If bridge is not to be constructed between the two pairings enter 0")
+graph = [[0] * n for _ in range(n)]
+
+print(graph)
+for i in range(n):
+    for j in range(n):
+        if i!=j and graph[i][j] == 0:
+            cost = int(input(f"{regions[i]}-{regions[j]} >>> "))
+            print(cost)
+            graph[i][j]= graph[j][i]=cost
+            
+
+
+
+
+g = PrimMST(n)
+g.graph = graph
 
 g.prim_mst()
