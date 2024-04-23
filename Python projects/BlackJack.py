@@ -9,7 +9,7 @@ for i in range(2,12):
 def dealCard()->int:
     
     while True:
-        card = random.randint(2,12)
+        card = random.randint(2,11)
         if cards[card]!=0:
             cards[card]-=1
             return card
@@ -33,7 +33,6 @@ def play_game():
     while True:
         choice = input(("what would you like to do h(hit)/s(stand):")).lower()
         if choice =='h':
-            card = random.randint(2,11)
             user_cards.append(dealCard())
             user_sum = sum(user_cards)
             if user_sum > 21:
@@ -78,7 +77,7 @@ def play_game():
 
                         comp_sum  = sum(comp_cards)
 
-            
+
 
                                        
 
