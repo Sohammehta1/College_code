@@ -13,7 +13,7 @@ class PrimMST:
                 min_val = key[v]
                 min_index = v # key with minimum index
         return min_index
-
+    
     def prim_mst(self):
         parent = [-1] * self.V
         key = [sys.maxsize] * self.V
