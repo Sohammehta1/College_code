@@ -1,4 +1,2 @@
 # College_code
-All college assignments and projects from 6th semester and onwards
-<br>
-code with coffee
+All college assignments done with a lot of effort, enjoy!
