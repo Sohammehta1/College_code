@@ -24,10 +24,13 @@ header {
 #photo-container {
     text-align: center;
     margin-top: 20px;
+    /* width: 100%;
+    height:100vh; */
 }
 
-#photo {
-    background-color: black;
+
+#photo img{
+    /* background-color: black; */
     border-radius: 50%;
     width: 200px;
     height: 200px;
