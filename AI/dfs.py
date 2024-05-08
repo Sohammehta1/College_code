@@ -32,7 +32,7 @@ graph2 ={
     3:[0]
 }
 
-if dfs(2,graph,6):
+if dfs(2,graph2,4):
     print("Cycle is present")
 else:
     print("Cycle is absent")

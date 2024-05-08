@@ -65,6 +65,7 @@ class Node:
                         print("Hello")
                         message["distance"] += 1
                         message["visited_nodes"][self.hostName] = 1
+                        message["path"].append(self.hostName)
                         if self.hostName == message["dest_name"]:
                             print("Message from source has arrived:")
                             print(message)
@@ -73,7 +74,6 @@ class Node:
                             # self.ping(message["src_name"], msg)
 
                         elif message["distance"] < message['ttl']:
-                            message["path"].append(self.hostName)
                             for key in self.neighbour_nodes.keys():
                                 if message["visited_nodes"][key] == 0:
                                     self.send_json(key, message)
@@ -90,17 +90,17 @@ class Node:
 
         
 
-    def ping(self,dest,msg):
-            with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-                s.connect(("127.0.0.1",dest))
-                msg = msg.encode('utf-8')
-                s.sendall(msg)
-                s.close()
-                data = s.recv(1024)
+    # def ping(self,dest,msg):
+    #         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+    #             s.connect(("127.0.0.1",dest))
+    #             msg = msg.encode('utf-8')
+    #             s.sendall(msg)
+    #             s.close()
+    #             data = s.recv(1024)
                 
                 
     def server(self):
-        self.server_socket.listen(self.n)
+        self.server_socket.listen(self.n) # listens to n nodes
         print(f"Server listening on {self.hostName}:{self.portNum}")
         while True:
             client_socket, address = self.server_socket.accept()
@@ -111,7 +111,8 @@ class Node:
 if __name__ == "__main__": # Server starts only when script is directly run, not when module is imported.
     p = int(input("Enter port number: "))
     n = input("Enter host name: ")
-    nd = Node(p, n,4)
+    nn = input("Enter number of nodes in the network : ")
+    nd = Node(p, n,nn)
     threading.Thread(target=nd.server).start()  # Start server in a separate thread
 
     dest = input("Enter the name of destination you want to find : ")

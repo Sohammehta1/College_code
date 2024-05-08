@@ -112,7 +112,7 @@ class Puzzle:
             self.closed.append(cur)
             del self.open[0]
 
-            """ sort the opne list based on f value """
+            """ sort the open list based on f value """
             self.open.sort(key = lambda x:x.fval,reverse=False)
 
 

@@ -2,7 +2,7 @@ import sys
 
 class PrimMST:
     def __init__(self, vertices):
-        self.V = vertices
+        self.V = vertices # number of vertices
         self.graph = [[0 for _ in range(vertices)] for _ in range(vertices)]
 
     def min_key(self, key, mst_set):
