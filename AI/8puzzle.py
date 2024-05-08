@@ -1,3 +1,4 @@
+import copy
 class Node:
     def __init__(self,data,level,fval):
         """ Initialize the node with the data, level of the node and the calculated fvalue """
@@ -25,7 +26,7 @@ class Node:
             of limits the return None """
         if x2 >= 0 and x2 < len(self.data) and y2 >= 0 and y2 < len(self.data):
             temp_puz = []
-            temp_puz = self.copy(puz)
+            temp_puz = copy.deepcopy(puz)
             temp = temp_puz[x2][y2]
             temp_puz[x2][y2] = temp_puz[x1][y1]
             temp_puz[x1][y1] = temp
@@ -34,15 +35,15 @@ class Node:
             return None
             
 
-    def copy(self,root):
-        """ Copy function to create a similar matrix of the given node"""
-        temp = []
-        for i in root:
-            t = []
-            for j in i:
-                t.append(j)
-            temp.append(t)
-        return temp    
+    # def copy(self,root):
+    #     """ Copy function to create a similar matrix of the given node"""
+    #     temp = []
+    #     for i in root:
+    #         t = []
+    #         for j in i:
+    #             t.append(j)
+    #         temp.append(t)
+    #     return temp    
             
     def find(self,puz,x):
         """ Specifically used to find the position of the blank space """
@@ -88,12 +89,15 @@ class Puzzle:
         print("Enter the goal state matrix \n")        
         goal = self.accept()
 
-        start = Node(start,0,0)
-        start.fval = self.f(start,goal)
+        start = Node(start, 0, 0)
+        start.fval = self.f(start, goal)
         """ Put the start node in the open list"""
         self.open.append(start)
         print("\n\n")
         while True:
+            if len(self.open) == 0:
+                print("No solution exists")
+                return
             cur = self.open[0]
             print("")
             print("  | ")
@@ -101,20 +105,22 @@ class Puzzle:
             print(" \\\'/ \n")
             for i in cur.data:
                 for j in i:
-                    print(j,end=" ")
+                    print(j, end=" ")
                 print("")
             """ If the difference between current and goal node is 0 we have reached the goal node"""
-            if(self.h(cur.data,goal) == 0):
+            if self.h(cur.data, goal) == 0:
                 break
             for i in cur.generate_child():
-                i.fval = self.f(i,goal)
-                self.open.append(i)
+                i.fval = self.f(i, goal)
+                # Check if child node is already in closed or open list
+                if i not in self.closed and i not in self.open:
+                    self.open.append(i)
             self.closed.append(cur)
             del self.open[0]
 
             """ sort the open list based on f value """
-            self.open.sort(key = lambda x:x.fval,reverse=False)
+            self.open.sort(key=lambda x: x.fval, reverse=False)
 
 
-puz = Puzzle(3)
+puz = Puzzle(2)
 puz.process()
