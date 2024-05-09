@@ -38,7 +38,7 @@ def kruskal(graph):
 
 # Example usage:
 graph = [
-    (0, 1, 10),
+    (0, 1, 10), # u,v,weight
     (0, 2, 6),
     (0, 3, 5),
     (1, 3, 15),
